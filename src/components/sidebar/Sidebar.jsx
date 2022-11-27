@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useAuthStore from "../../hooks/useAuthStore";
 
 const Sidebar = () => {
+ 
+  const {startLogout } = useAuthStore();
+ 
   return (
     <div className="sidebar">
       <Link to={"/"}>
@@ -42,7 +46,7 @@ const Sidebar = () => {
           </Link>
         </li>
 
-        <li className="log_out">
+        <li className="log_out" onClick={startLogout}>
           <Link to={"/"}>
             <i className="bx bx-log-out"></i>
             <span className="links_name">Cerrar sesión</span>

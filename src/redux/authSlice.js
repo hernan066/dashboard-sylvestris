@@ -5,7 +5,7 @@ export const authSlice = createSlice({
   name: "auth",
   initialState: {
     status: "not-authenticated", // 'authenticated','not-authenticated',
-    user: {},
+    user: null,
     errorMessage: undefined,
   },
   reducers: {
