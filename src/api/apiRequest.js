@@ -13,7 +13,7 @@ const apiRequest = axios.create({
 apiRequest.interceptors.request.use((config) => {
   config.headers = {
     ...config.headers,
-    "x-token": token,
+    'Authorization': token,
   };
 
   return config;

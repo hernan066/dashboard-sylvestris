@@ -4,11 +4,13 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 import MenuListUsers from "../menuList/ManuListUsers";
 import "./listUsers.css";
+import { useNavigate } from "react-router-dom";
 
 const ListUsers = ({ users }) => {
   const listUsers = users.data.users;
   const [open, setOpen] = useState(null);
   const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
 
   const handleOpenMenu = (id, event) => {
     setOpen(event.currentTarget);
@@ -87,7 +89,7 @@ const ListUsers = ({ users }) => {
               color: "white",
             }}
           >
-           User
+            User
           </div>
         ),
     },
@@ -114,11 +116,10 @@ const ListUsers = ({ users }) => {
       <div className="responsive-table">
         <div className="admin__products__header">
           <h2>Lista de usuarios</h2>
-          <a href="/admin/users/create_user">
-            <button className="btn__crear">
-              <i className="bx bx-message-square-add"></i> Agregar Usuario
-            </button>
-          </a>
+
+          <button className="btn__crear" onClick={()=>navigate("/users/create")}>
+            <i className="bx bx-message-square-add"></i> Agregar Usuario
+          </button>
         </div>
 
         <div style={{ height: 300, width: "100%" }}>

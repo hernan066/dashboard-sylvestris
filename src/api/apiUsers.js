@@ -6,7 +6,7 @@ const token = localStorage.getItem("token");
 
 export const userApi = createApi({
   reducerPath: "userApi",
-  baseQuery: retry(fetchBaseQuery({ baseUrl: API, headers: { Authorization: token } }), {
+  baseQuery: retry(fetchBaseQuery({ baseUrl: API, headers: { 'Authorization': token } }), {
     maxRetries: 2,
   }),
   keepUnusedDataFor: 60, // duracion de datos en cache
