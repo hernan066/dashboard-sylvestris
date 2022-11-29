@@ -22,6 +22,7 @@ export const Login = () => {
   const handleSubmit = async (values) => {
     console.log(values);
     startLogin({ email: values.email, password: values.password });
+    navigate('/')
   };
 
   useEffect(() => {

@@ -1,31 +1,37 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import apiRequest from "../api/apiRequest";
-import { useGetUsersQuery } from "../api/apiUsers";
 import Error from "../components/error/Error";
 import Layout from "../components/layouts/Layout";
 import Loading from "../components/loading/Loading";
 import ListUsers from "../components/users/ListUsers";
 
 const UserPage = () => {
-  const { data: users, isLoading, isError } = useGetUsersQuery();
-  console.log(users)
-
-  const getListUsers = async ()=>{
-    const {data} = await apiRequest('/users')
-    return data
-  }
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    const user = getListUsers()
-    console.log(user)
-  }, [])
-  
+    const getListUsers = async () => {
+      try {
+        const { data } = await apiRequest("/users");
+        console.log(data.data.users)
+        if (data) {
+          setUsers(data.data.users);
+          setLoading(false);
+        }
+      } catch (error) {
+        setError(error)
+        setLoading(false);
+      }
+    };
+    getListUsers();
+  }, []);
 
   return (
     <Layout>
-      {isLoading && <Loading />}
-      {isError && <Error />}
-      {users && <ListUsers users={users} />}
+      {loading && <Loading />}
+      {error && <Error />}
+     {users && <ListUsers users={users} />}
     </Layout>
   );
 };

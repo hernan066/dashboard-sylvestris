@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import CategoryPage from "../pages/CategoryPage";
 import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
@@ -10,11 +10,10 @@ import { PublicRoute } from "./PublicRoute";
 
 const AppRouter = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
-        {/* public */}
-        <Route path="/login" element={ <PublicRoute> <LoginPage /> </PublicRoute>  } />
-        {/* private */}
+        {/* <Route path="/login" element={ <PublicRoute> <LoginPage /> </PublicRoute>  } />
+       
         <Route path="/" element={<PrivateRoute><DashboardPage /></PrivateRoute> } />
         
         <Route path="/users" element={<PrivateRoute> <UserPage /> </PrivateRoute>} />
@@ -23,8 +22,20 @@ const AppRouter = () => {
         <Route path="/products" element={<PrivateRoute> <ProductPage /> </PrivateRoute>} />
         
         <Route path="/categories" element={<PrivateRoute> <CategoryPage /> </PrivateRoute>} />
+        <Route path="/login" element={ <PublicRoute> <LoginPage /> </PublicRoute>  } /> */}
+        {/* private */}
+        <Route path="/" element={<DashboardPage />} />
+
+        <Route path="/users" element={<UserPage />} />
+        <Route path="/users/create" element={<UserCreatePage />} />
+
+        <Route path="/products" element={<ProductPage />} />
+
+        <Route path="/categories" element={<CategoryPage />} />
+        
+        <Route path="/login" element={  <LoginPage />   } />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
