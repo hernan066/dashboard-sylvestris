@@ -12,28 +12,21 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/login" element={ <PublicRoute> <LoginPage /> </PublicRoute>  } />
-       
-        <Route path="/" element={<PrivateRoute><DashboardPage /></PrivateRoute> } />
-        
-        <Route path="/users" element={<PrivateRoute> <UserPage /> </PrivateRoute>} />
-        <Route path="/users/create" element={<PrivateRoute> <UserCreatePage /> </PrivateRoute>} />
-        
-        <Route path="/products" element={<PrivateRoute> <ProductPage /> </PrivateRoute>} />
-        
-        <Route path="/categories" element={<PrivateRoute> <CategoryPage /> </PrivateRoute>} />
-        <Route path="/login" element={ <PublicRoute> <LoginPage /> </PublicRoute>  } /> */}
-        {/* private */}
-        <Route path="/" element={<DashboardPage />} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<DashboardPage />} />
 
-        <Route path="/users" element={<UserPage />} />
-        <Route path="/users/create" element={<UserCreatePage />} />
+          <Route path="/users" element={<UserPage />} />
+          <Route path="/users/create" element={<UserCreatePage />} />
 
-        <Route path="/products" element={<ProductPage />} />
+          <Route path="/products" element={<ProductPage />} />
 
-        <Route path="/categories" element={<CategoryPage />} />
-        
-        <Route path="/login" element={  <LoginPage />   } />
+          <Route path="/categories" element={<CategoryPage />} />
+        </Route>
+
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<LoginPage />} />
+        </Route>
+      
       </Routes>
     </BrowserRouter>
   );

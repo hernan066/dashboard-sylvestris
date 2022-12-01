@@ -21,12 +21,17 @@ function useAuthStore() {
         email,
         password,
       });
+
+    
       localStorage.setItem("token", data.token);
       localStorage.setItem("token-init-date", new Date().getTime());
+      
       dispatch(
         onLogin({
           id: data?.id,
           token: data?.token,
+          avatar: data?.avatar,
+          user: data?.name
         })
       );
     } catch (error) {
