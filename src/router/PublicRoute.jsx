@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
-export const PublicRoute = ({ children }) => {
+export const PublicRoute = () => {
 
     const {user} = useSelector(state => state.auth)
     
 
-    return user
+    return user?.token
         ? <Navigate to="/" />
-        : children
+        : <Outlet />
 }
