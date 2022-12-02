@@ -2,7 +2,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Avatar, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
-import MenuListUsers from "../menuList/ManuListUsers";
+import MenuListUsers from "./ManuListUsers";
 import "./listUsers.css";
 import { useNavigate } from "react-router-dom";
 
@@ -125,7 +125,7 @@ const ListUsers = ({ users = [] }) => {
           </button>
         </div>
 
-        <div style={{ height: 300, width: "100%" }}>
+        <div style={{ height: 600, width: "100%" }}>
           <DataGrid
             checkboxSelection
             disableSelectionOnClick

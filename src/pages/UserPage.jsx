@@ -3,7 +3,8 @@ import apiRequest from "../api/apiRequest";
 import Error from "../components/error/Error";
 import Layout from "../components/layouts/Layout";
 import Loading from "../components/loading/Loading";
-import ListUsers from "../components/users/ListUsers";
+import ListUsers from "../components/users/ListUser/ListUsers";
+
 
 const UserPage = () => {
   const [loading, setLoading] = useState(true);
