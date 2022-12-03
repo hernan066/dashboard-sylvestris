@@ -2,6 +2,7 @@ import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import CategoryPage from "../pages/CategoryPage";
 import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
+import ProductCreatePage from "../pages/ProductCreatePage";
 import ProductPage from "../pages/ProductPage";
 import UserCreatePage from "../pages/UserCreatePage";
 import UserEditPage from "../pages/UserEditPage";
@@ -21,6 +22,7 @@ const AppRouter = () => {
           <Route path="/users/edit/:id" element={<UserEditPage />} />
 
           <Route path="/products" element={<ProductPage />} />
+          <Route path="/products/create" element={<ProductCreatePage />} />
 
           <Route path="/categories" element={<CategoryPage />} />
         </Route>

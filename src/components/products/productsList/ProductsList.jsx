@@ -100,7 +100,7 @@ const ListProducts = ({ products = [] }) => {
 
           <button
             className="btn__crear"
-            onClick={() => navigate("/users/create")}
+            onClick={() => navigate("/products/create")}
           >
             <i className="bx bx-message-square-add"></i> Agregar Producto
           </button>
