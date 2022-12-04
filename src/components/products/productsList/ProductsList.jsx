@@ -8,18 +8,18 @@ import MenuListProducts from "./ManuListProducts";
 const ListProducts = ({ products = [] }) => {
   const [pageSize, setPageSize] = useState(10);
   const [open, setOpen] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const [productId, setProductId] = useState(null);
   const navigate = useNavigate();
   console.log(products)
 
   const handleOpenMenu = (id, event) => {
     setOpen(event.currentTarget);
-    setUserId(id);
+    setProductId(id);
   };
 
   const handleCloseMenu = () => {
     setOpen(null);
-    setUserId(null);
+    setProductId(null);
   };
 
   const columns = [
@@ -127,7 +127,7 @@ const ListProducts = ({ products = [] }) => {
       <MenuListProducts
         open={open}
         handleCloseMenu={handleCloseMenu}
-        userId={userId}
+        productId={productId}
       />
     </>
   );

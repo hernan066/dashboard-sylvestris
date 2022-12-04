@@ -5,7 +5,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
 
 
-function MenuListProducts({ open, handleCloseMenu, userId }) {
+function MenuListProducts({ open, handleCloseMenu, productId }) {
   const navigate = useNavigate();
 
   return (
@@ -28,11 +28,11 @@ function MenuListProducts({ open, handleCloseMenu, userId }) {
         },
       }}
     >
-      <MenuItem onClick={() => navigate(`/users/details/${userId}`)}>
+      <MenuItem onClick={() => navigate(`/products/details/${productId}`)}>
         <VisibilityIcon sx={{ mr: 1 }} />
         Ver
       </MenuItem>
-      <MenuItem onClick={() => navigate(`/users/edit/${userId}`)}>
+      <MenuItem onClick={() => navigate(`/products/edit/${productId}`)}>
         <EditIcon sx={{ mr: 1 }} />
         Edit
       </MenuItem>
