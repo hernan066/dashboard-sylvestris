@@ -3,6 +3,7 @@ import { MenuItem, Popover } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
+import PermMediaIcon from '@mui/icons-material/PermMedia';
 
 
 function MenuListProducts({ open, handleCloseMenu, productId }) {
@@ -18,7 +19,7 @@ function MenuListProducts({ open, handleCloseMenu, productId }) {
       PaperProps={{
         sx: {
           p: 1,
-          width: 120,
+          width: 135,
           zIndex: 20,
           "& .MuiMenuItem-root": {
             px: 1,
@@ -28,13 +29,13 @@ function MenuListProducts({ open, handleCloseMenu, productId }) {
         },
       }}
     >
-      <MenuItem onClick={() => navigate(`/products/details/${productId}`)}>
-        <VisibilityIcon sx={{ mr: 1 }} />
-        Ver
+      <MenuItem onClick={() => navigate(`/products/images/${productId}`)}>
+        <PermMediaIcon sx={{ mr: 1 }} />
+        Imagenes
       </MenuItem>
       <MenuItem onClick={() => navigate(`/products/edit/${productId}`)}>
         <EditIcon sx={{ mr: 1 }} />
-        Edit
+        Editar
       </MenuItem>
     </Popover>
   );

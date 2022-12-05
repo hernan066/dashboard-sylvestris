@@ -1,8 +1,58 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
+import { useEffect, useState } from "react";
+import apiRequest from "../api/apiRequest";
 import Layout from "../components/layouts/Layout";
 
 const DashboardPage = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [destacados, setDestacados] = useState([]);
+  const [last, setLast] = useState([]);
+  const [users, setUsers] = useState([]);
+  
+
+  useEffect(() => {
+    const getListProducts = async () => {
+      try {
+        const { data } = await apiRequest("/products");
+
+        if (data) {
+          setProducts(data.data.products);
+          setDestacados(
+            data.data.products.filter((product) => product.destacado)
+          );
+          setLast(products.sort(((a, b) => b.createdAt - a.createdAt)).slice(0, 10))
+          console.log(last)
+          setLoading(false);
+        }
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    getListProducts();
+  }, []);
+  
+  useEffect(() => {
+    const getListProducts = async () => {
+      try {
+        const { data } = await apiRequest("/users");
+
+        if (data) {
+          setUsers(data.data.users);
+         
+          setLoading(false);
+        }
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    getListProducts();
+  }, []);
+
   return (
     <Layout>
       <div className="home-content">
@@ -20,14 +70,15 @@ const DashboardPage = () => {
           </div>
           <div className="box">
             <div className="right-side">
-              <div className="box-topic">Ventas</div>
-              <div className="number">433</div>
+              <div className="box-topic">Productos</div>
+              <div className="number">{products.length}</div>
               <div className="indicator">
                 <i className="bx bx-up-arrow-alt"></i>
                 <span className="text">En subida</span>
               </div>
             </div>
-            <i className="bx bxs-cart-add cart two"></i>
+           
+            <i className="bx bxs-florist cart two"></i>
           </div>
           <div className="box">
             <div className="right-side">
@@ -43,7 +94,7 @@ const DashboardPage = () => {
           <div className="box">
             <div className="right-side">
               <div className="box-topic">Usuarios</div>
-              <div className="number">154</div>
+              <div className="number">{users.length}</div>
               <div className="indicator">
                 <i className="bx bx-up-arrow-alt"></i>
                 <span className="text">En subida</span>
@@ -184,65 +235,19 @@ const DashboardPage = () => {
             </div>
           </div>
           <div className="top-sales box">
-            <div className="title">Top Productos Vendidos</div>
+            <div className="title">Productos Destacados</div>
             <ul className="top-sales-details">
-              <li>
-                <a href="#">
-                  <img src="images/sunglasses.jpg" alt="" />
-                  <span className="product">Adromischus Cooperii</span>
-                </a>
-                <span className="price">$2100</span>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="images/jeans.jpg" alt="" />
-                  <span className="product">Aeonium Diplocyclum</span>
-                </a>
-                <span className="price">$1560</span>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="images/nike.jpg" alt="" />
-                  <span className="product">Cereus Forbesii</span>
-                </a>
-                <span className="price">$1230</span>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="images/scarves.jpg" alt="" />
-                  <span className="product">Echeveria Runyonii</span>
-                </a>
-                <span className="price">$1200</span>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="images/blueBag.jpg" alt="" />
-                  <span className="product">Gasteria Hippo</span>
-                </a>
-                <span className="price">$1115</span>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="images/bag.jpg" alt="" />
-                  <span className="product">Glandulicactus Mathssonii</span>
-                </a>
-                <span className="price">$2345</span>
-              </li>
-
-              <li>
-                <a href="#">
-                  <img src="images/addidas.jpg" alt="" />
-                  <span className="product">Frailea Pygmaea </span>
-                </a>
-                <span className="price">$2345</span>
-              </li>
-              <li>
-                <a href="#">
-                  <img src="images/shirt.jpg" alt="" />
-                  <span className="product">Begonia Rex</span>
-                </a>
-                <span className="price">$1245</span>
-              </li>
+              {destacados.map((product) => {
+                return (
+                  <li key={product.nombre}>
+                    <a href="#">
+                      <img src={product.images[0].filename} alt="" />
+                      <span className="product">{product.nombre}</span>
+                    </a>
+                    <span className="price">${product.precio}</span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

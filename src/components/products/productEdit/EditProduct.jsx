@@ -9,7 +9,7 @@ import apiRequest from "../../../api/apiRequest";
 const ONLY_NUMBERS = /^[0-9+]*$|^NULL$/;
 const ONLY_LETTERS = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/;
 const NUMBERS_AND_LETTERS = /^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ ]+$/;
-const NUMBERS_LETTERS_SYMBOLS = /^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ,.-:° ]+$/;
+const NUMBERS_LETTERS_SYMBOLS = /^[a-zA-Z0-9ÁÉÍÓÚáéíóúñÑ,.-:°!¡º ]+$/;
 
 const SignupSchema = Yup.object().shape({
   nombre: Yup.string()

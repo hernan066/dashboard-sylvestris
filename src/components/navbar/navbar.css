@@ -329,7 +329,8 @@ nav .profile-details i{
   object-fit: cover;
   border-radius: 12px;
   margin-right: 10px;
-  background: #333;
+  background: rgb(245, 245, 245);
+  box-shadow: 2px 2px 3px rgba(51, 51, 51, 0.26);
 }
 .sales-boxes .top-sales li a{
   display: flex;
