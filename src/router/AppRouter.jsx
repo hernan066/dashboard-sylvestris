@@ -4,6 +4,7 @@ import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
 import ProductCreatePage from "../pages/ProductCreatePage";
 import ProductEditPage from "../pages/ProductEditPage";
+import ProductImagePage from "../pages/ProductImagePage";
 import ProductPage from "../pages/ProductPage";
 import UserCreatePage from "../pages/UserCreatePage";
 import UserEditPage from "../pages/UserEditPage";
@@ -25,6 +26,8 @@ const AppRouter = () => {
           <Route path="/products" element={<ProductPage />} />
           <Route path="/products/create" element={<ProductCreatePage />} />
           <Route path="/products/edit/:id" element={<ProductEditPage />} />
+          
+          <Route path="/products/images/:id" element={<ProductImagePage />} />
 
           <Route path="/categories" element={<CategoryPage />} />
         </Route>

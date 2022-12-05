@@ -10,10 +10,10 @@ const Navbar = () => {
         <i className="bx bx-menu sidebarBtn"></i>
         <span className="dashboard">Dashboard</span>
       </div>
-      <div className="search-box">
+      {/* <div className="search-box">
         <input type="text" placeholder="Search..." />
         <i className="bx bx-search"></i>
-      </div>
+      </div> */}
       <div className="profile-details">
         <img
           src={`http://localhost:3000/images/avatars/${avatar}`}

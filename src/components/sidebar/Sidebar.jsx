@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import useAuthStore from "../../hooks/useAuthStore";
 
+
 const Sidebar = () => {
- 
-  const {startLogout } = useAuthStore();
- 
+  const { startLogout } = useAuthStore();
+
   return (
     <div className="sidebar">
       <Link to={"/"}>
@@ -44,6 +44,12 @@ const Sidebar = () => {
             <i className="bx bx-list-ul"></i>
             <span className="links_name">Ordenes</span>
           </Link>
+        </li>
+        <li>
+          <a href={`${process.env.REACT_APP_URL}`} className="sidebar__menu">
+            <i className="bx bx-arrow-back"></i>
+            <span className="links_name">Volver</span>
+          </a>
         </li>
 
         <li className="log_out" onClick={startLogout}>

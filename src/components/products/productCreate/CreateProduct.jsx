@@ -1,10 +1,10 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-
 import Swal from "sweetalert2";
 import apiRequest from "../../../api/apiRequest";
+import ImageUpload from "./ImageUpload";
 
 const ONLY_NUMBERS = /^[0-9+]*$|^NULL$/;
 const ONLY_LETTERS = /^[a-zA-ZÁÉÍÓÚáéíóúñÑ ]+$/;
@@ -19,28 +19,59 @@ const SignupSchema = Yup.object().shape({
     .required("Requerido")
     .matches(ONLY_LETTERS, "Solo letras"),
   stock: Yup.number().positive("Solo números positivos").required("Requerido"),
-  descripcion: Yup.string().required("Requerido").matches(NUMBERS_LETTERS_SYMBOLS, "Solo letras y números"),
-  cuidados: Yup.string().required("Requerido").matches(NUMBERS_LETTERS_SYMBOLS, "Solo letras y números"),
+  descripcion: Yup.string()
+    .required("Requerido")
+    .matches(NUMBERS_LETTERS_SYMBOLS, "Solo letras y números"),
+  cuidados: Yup.string()
+    .required("Requerido")
+    .matches(NUMBERS_LETTERS_SYMBOLS, "Solo letras y números"),
   categoria: Yup.string().required("Requerido"),
   destacado: Yup.string().required("Requerido"),
-  descripcion_altura: Yup.string().required("Requerido").matches(NUMBERS_LETTERS_SYMBOLS,"Solo letras y números"),
-  descripcion_maceta: Yup.string().required("Requerido").matches(NUMBERS_LETTERS_SYMBOLS,"Solo letras y números"),
+  descripcion_altura: Yup.string()
+    .required("Requerido")
+    .matches(NUMBERS_LETTERS_SYMBOLS, "Solo letras y números"),
+  descripcion_maceta: Yup.string()
+    .required("Requerido")
+    .matches(NUMBERS_LETTERS_SYMBOLS, "Solo letras y números"),
   precio: Yup.number().positive("Solo números positivos").required("Requerido"),
-  agua: Yup.number().positive("Solo números positivos").required("Requerido"),
-  luz: Yup.number().positive("Solo números positivos").required("Requerido"),
+  //image1: Yup.string().required("Requerido"),
+  //image2: Yup.string().required("Requerido"),
 });
 
 const CreateProduct = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [errorUpload1, setErrorUpload1] = useState(null);
+  const [errorUpload2, setErrorUpload2] = useState(null);
+  const [formError, setFormError] = useState({
+    image1: null,
+    image2: null,
+  });
+
+  const [urlImage1, setUrlImage1] = useState("");
+  const [urlImage2, setUrlImage2] = useState("");
 
   const handleSubmit = async (values) => {
+    // valido errores
+    if (!urlImage1 || !urlImage2) {
+      return setFormError({
+        image1: urlImage1 ? null : "Requerido",
+        image2: urlImage2 ? null : "Requerido",
+      });
+     
+    }
+
     setLoading(true);
-console.log(values)
+    values.image1 = urlImage1
+    values.image2 = urlImage2
+    console.log(values);
+
     try {
+      
       const { data } = await apiRequest.post("/products", values);
-       if (data) {
+      
+      if (data) {
         Swal.fire({
           position: "center",
           icon: "success",
@@ -49,14 +80,28 @@ console.log(values)
           timer: 2500,
         });
         navigate("/products");
-      } 
+      }
     } catch (error) {
       setError(
         error.response?.data?.errors[0]?.msg || "Error: usuario no creado"
       );
       console.log(error.response?.data?.errors[0].msg);
-    }
+    } 
   };
+
+  useEffect(() => {
+    setFormError({
+      image1: urlImage1 ? null : "Requerido",
+      image2: urlImage2 ? null : "Requerido",
+    });
+  }, [urlImage1, urlImage2]);
+
+  useEffect(() => {
+    setFormError({
+      image1: null,
+      image2: null,
+    });
+  }, []);
 
   return (
     <div className="admin__container">
@@ -74,15 +119,15 @@ console.log(values)
             descripcion_altura: "",
             descripcion_maceta: "",
             precio: undefined,
-            agua: undefined,
-            luz: undefined,
+            image1: urlImage1,
+            image2: urlImage2,
           }}
           validationSchema={SignupSchema}
           onSubmit={(values, { resetForm }) => {
             handleSubmit(values);
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, values }) => (
             <Form class="admin__form">
               <div className="col">
                 <div className="form__field">
@@ -230,24 +275,44 @@ console.log(values)
                 </div>
 
                 <div className="form__field">
-                  <label for="">Agua(*)</label>
-                  <Field type="number" name="agua" className="input__admin" />
+                  <label for="">Imagen 1(*)</label>
 
-                  <ErrorMessage
-                    name="agua"
-                    component="p"
-                    className="form__error"
-                  />
+                  <div style={{ display: "flex", alignItems: "flex-start" }}>
+                    <Field
+                      type="text"
+                      name="image1"
+                      className="input__admin"
+                      value={urlImage1}
+                    />
+
+                    <ImageUpload
+                      setErrorUpload={setErrorUpload1}
+                      setUrlImage={setUrlImage1}
+                    />
+                  </div>
+                  {formError.image1 && (
+                    <p className="form__error">{formError.image1}</p>
+                  )}
                 </div>
                 <div className="form__field">
-                  <label for="">Luz(*)</label>
-                  <Field type="number" name="luz" className="input__admin" />
+                  <label for="">Imagen 2(*)</label>
+                  <div style={{ display: "flex", alignItems: "flex-start" }}>
+                    <Field
+                      type="text"
+                      name="image2"
+                      className="input__admin"
+                      value={urlImage2}
+                    />
 
-                  <ErrorMessage
-                    name="luz"
-                    component="p"
-                    className="form__error"
-                  />
+                    <ImageUpload
+                      setErrorUpload={setErrorUpload2}
+                      setUrlImage={setUrlImage2}
+                    />
+                  </div>
+
+                  {formError.image2 && (
+                    <p className="form__error">{formError.image2}</p>
+                  )}
                 </div>
 
                 <button

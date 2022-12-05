@@ -4,6 +4,8 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuListProducts from "./ManuListProducts";
+import CheckIcon from "@mui/icons-material/Check";
+import CloseIcon from "@mui/icons-material/Close";
 
 const ListProducts = ({ products = [] }) => {
   const [pageSize, setPageSize] = useState(10);
@@ -34,7 +36,7 @@ const ListProducts = ({ products = [] }) => {
       width: 100,
       renderCell: (params) => (
         <Avatar
-          src={`http://localhost:3000/images/products/${params.row.image}`}
+          src={params.row.image}
         />
       ),
       sortable: false,
@@ -55,6 +57,10 @@ const ListProducts = ({ products = [] }) => {
       field: "stock",
       headerName: "Stock",
     },
+    {
+      field: "precio",
+      headerName: "Precio",
+    },
 
     {
       field: "descripcion_altura",
@@ -67,18 +73,53 @@ const ListProducts = ({ products = [] }) => {
       flex: 1,
     },
     {
-      field: "agua",
-      headerName: "Agua",
+      field: "categoria",
+      headerName: "Categoría",
     },
     {
-      field: "luz",
-      headerName: "Luz",
+      field: "destacado",
+      headerName: "Destacado",
+      headerClassName: "super-app-theme--header",
+      renderCell: (params) =>
+        params.row.destacado ? (
+          <div
+            style={{
+              height: "30px",
+              width: "30px",
+              borderRadius: "50%",
+              backgroundColor: "green",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "white",
+            }}
+          >
+            <CheckIcon />
+          </div>
+        ) : (
+          <div
+            style={{
+              height: "30px",
+              width: "30px",
+              borderRadius: "50%",
+              backgroundColor: "red",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "white",
+            }}
+          >
+            <CloseIcon />
+          </div>
+        ),
     },
 
     {
       field: "accessLevel",
       headerName: "Menu",
       headerClassName: "super-app-theme--header",
+      sortable: false,
+      filterable: false,
 
       renderCell: ({ row: { id } }) => (
         <IconButton
@@ -113,7 +154,8 @@ const ListProducts = ({ products = [] }) => {
             components={{ Toolbar: GridToolbar }}
             rows={products.map((product) => ({
               ...product,
-              image: product.images[0]?.filename || ''
+              image: product.images[0]?.filename || '',
+              categoria: product.category?.name,
             }))}
             columns={columns}
             getRowId={(row) => row.id}
