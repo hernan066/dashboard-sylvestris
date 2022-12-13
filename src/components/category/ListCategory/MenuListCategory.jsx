@@ -5,7 +5,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
 
 
-function MenuListCategory({ open, handleCloseMenu, userId }) {
+function MenuListCategory({ open, handleCloseMenu, categoryId }) {
   const navigate = useNavigate();
 
   return (
