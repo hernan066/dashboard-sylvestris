@@ -2,9 +2,9 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Avatar, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
-import MenuListCategory from "./ManuListCategory";
-import "./listUsers.css";//mantengo el CSS de los usuarios
+// import "./listUsers.css";//mantengo el CSS de los usuarios => le apuntas a un archivo que no existe
 import { useNavigate } from "react-router-dom";
+import MenuListCategory from "./MenuListCategory";
 
 const ListCategory = ({ categories = [] }) => {
   console.log(categories);
@@ -90,7 +90,7 @@ const ListCategory = ({ categories = [] }) => {
           />
         </div>
       </div>
-      //<MenuListCategory
+      <MenuListCategory /* no se comenta con // */
         open={open}
         handleCloseMenu={handleCloseMenu}
         categoryId={categoryId}
