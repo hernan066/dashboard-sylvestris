@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { categoryParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import apiRequest from "../api/apiRequest";
 import Error from "../components/error/Error";
 import Layout from "../components/layouts/Layout";
@@ -8,7 +8,7 @@ import Loading from "../components/loading/Loading";
 import EditCategory from "../components/category/EditCategory/EditCategory";
 
 const CategoryEditPage = () => {
-  const { id } = categoryParams();
+  const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [category, setCategory] = useState(null);
@@ -36,7 +36,7 @@ const CategoryEditPage = () => {
     <Layout>
       {loading && <Loading />}
       {error && <Error />}
-      {user && <EditCategory category={category} />}
+      {category && <EditCategory category={category} />}
     </Layout>
   );
 };
