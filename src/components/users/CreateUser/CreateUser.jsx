@@ -46,6 +46,7 @@ const CreateUser = () => {
           showConfirmButton: false,
           timer: 2500,
         });
+        setLoading(false);
         navigate("/users");
       }
     } catch (error) {

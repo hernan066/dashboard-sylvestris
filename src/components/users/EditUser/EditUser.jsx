@@ -2,7 +2,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-
 import Swal from "sweetalert2";
 import apiRequest from "../../../api/apiRequest";
 
@@ -134,7 +133,7 @@ const EditUser = ({ user }) => {
                     className="form__error"
                   />
                 </div>
-                <div className="form__field">
+                <div className="form__field" >
                   <label for="">Email(*)</label>
                   <Field
                     type="email"
