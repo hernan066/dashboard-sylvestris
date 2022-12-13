@@ -14,7 +14,7 @@ const CategoryPage = () => {
   useEffect(() => {
     const getListCategory = async () => {
       try {
-        const { data } = await apiRequest("/categories");
+        const { data } = await apiRequest("/category");
         console.log(data.data.categories)
         if (data) {
           setCategory(data.data.categories);
