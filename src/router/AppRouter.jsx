@@ -1,5 +1,7 @@
 import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import CategoryPage from "../pages/CategoryPage";
+import CategoryCreatePage from "../pages/CategoryCreatePage";
+import CategoryEditPage from "../pages/CategoryEditPage";
 import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
 import ProductCreatePage from "../pages/ProductCreatePage";
@@ -18,7 +20,7 @@ const AppRouter = () => {
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<DashboardPage />} />
-
+ 
           <Route path="/users" element={<UserPage />} />
           <Route path="/users/create" element={<UserCreatePage />} />
           <Route path="/users/edit/:id" element={<UserEditPage />} />
@@ -30,6 +32,8 @@ const AppRouter = () => {
           <Route path="/products/images/:id" element={<ProductImagePage />} />
 
           <Route path="/categories" element={<CategoryPage />} />
+          <Route path="/category/create" element={<CategoryCreatePage />} />
+          <Route path="/category/edit/:id" element={<CategoryEditPage />} />
         </Route>
 
         <Route element={<PublicRoute />}>
