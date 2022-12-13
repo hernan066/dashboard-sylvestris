@@ -9,17 +9,17 @@ import { useNavigate } from "react-router-dom";
 const ListCategory = ({ categories = [] }) => {
   console.log(categories);
   const [open, setOpen] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const [categoryId, setCategoryId] = useState(null);
   const navigate = useNavigate();
 
   const handleOpenMenu = (id, event) => {
     setOpen(event.currentTarget);
-    setUserId(id);
+    setCategoryId(id);
   };
 
   const handleCloseMenu = () => {
     setOpen(null);
-    setUserId(null);
+    setCategoryId(null);
   };
 
   const columns = [
