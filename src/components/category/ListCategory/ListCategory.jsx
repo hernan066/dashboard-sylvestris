@@ -2,6 +2,7 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Avatar, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useState } from "react";
+import MenuListCategory from "./ManuListCategory";
 import "./listUsers.css";//mantengo el CSS de los usuarios
 import { useNavigate } from "react-router-dom";
 
@@ -45,41 +46,6 @@ const ListCategory = ({ categories = [] }) => {
       flex: 1,
     },
     {
-      renderCell: (params) =>
-        params.row.rolId == 1 ? (
-          <div
-            style={{
-              height: "30px",
-              width: "60px",
-              borderRadius: "15px",
-              backgroundColor: "red",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-            }}
-          >
-            Admin
-          </div>
-        ) : (
-          <div
-            style={{
-              height: "30px",
-              width: "60px",
-              borderRadius: "15px",
-              backgroundColor: "green",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "white",
-            }}
-          >
-            User
-          </div>
-        ),
-    },
-
-    {
       field: "accessLevel",
       headerName: "Menu",
       headerClassName: "super-app-theme--header",
@@ -100,13 +66,13 @@ const ListCategory = ({ categories = [] }) => {
     <>
       <div className="responsive-table">
         <div className="admin__products__header">
-          <h2>Lista de usuarios</h2>
+          <h2>Lista de categorias</h2>
 
           <button
             className="btn__crear"
-            onClick={() => navigate("/users/create")}
+            onClick={() => navigate("/category/create")}
           >
-            <i className="bx bx-message-square-add"></i> Agregar Usuario
+            <i className="bx bx-message-square-add"></i> Agregar Categoria
           </button>
         </div>
 
@@ -115,26 +81,22 @@ const ListCategory = ({ categories = [] }) => {
             checkboxSelection
             disableSelectionOnClick
             components={{ Toolbar: GridToolbar }}
-            rows={users.map((user) => ({
-              id: user.id,
-              name: user.name,
-              lastname: user.lastname,
-              email: user.email,
-              avatar: user.avatar,
-              rolId: user.rolId,
+            rows={categories.map((category) => ({
+              id: category.id,
+              name: category.name,      
             }))}
             columns={columns}
             getRowId={(row) => row.id}
           />
         </div>
       </div>
-      <MenuListUsers
+      //<MenuListCategory
         open={open}
         handleCloseMenu={handleCloseMenu}
-        userId={userId}
+        categoryId={categoryId}
       />
     </>
   );
 };
 
-export default ListUsers;
+export default ListCategory;
