@@ -1,13 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import useAuthStore from "../../hooks/useAuthStore";
 
 const Sidebar = () => {
   const { startLogout } = useAuthStore();
   const { pathname } = useLocation();
+  const { menu } = useSelector(store => store.ui)
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${menu && 'active'}`}>
       <Link to={"/"}>
         <div className="logo-details">
           <i className="bx bxs-florist"></i>
