@@ -40,7 +40,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link to={"/"} className="sidebar__menu">
+          <Link to={"/orders"} className="sidebar__menu">
             <i className="bx bx-list-ul"></i>
             <span className="links_name">Ordenes</span>
           </Link>
