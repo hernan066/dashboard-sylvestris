@@ -34,9 +34,9 @@ const AppRouter = () => {
           
           <Route path="/products/images/:id" element={<ProductImagePage />} />
 
-          <Route path="/categories" element={<CategoryPage />} />
+          {/* <Route path="/categories" element={<CategoryPage />} />
           <Route path="/category/create" element={<CategoryCreatePage />} />
-          <Route path="/category/edit/:id" element={<CategoryEditPage />} />
+          <Route path="/category/edit/:id" element={<CategoryEditPage />} /> */}
           
           <Route path="/orders" element={<OrderPage />} />
          

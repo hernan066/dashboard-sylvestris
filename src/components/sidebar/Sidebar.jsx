@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useAuthStore from "../../hooks/useAuthStore";
-
 
 const Sidebar = () => {
   const { startLogout } = useAuthStore();
+  const { pathname } = useLocation();
 
   return (
     <div className="sidebar">
@@ -16,31 +16,32 @@ const Sidebar = () => {
       </Link>
       <ul className="nav-links">
         <li>
-          <Link to={"/"} className="sidebar__menu active">
+          <Link
+            to={"/"}
+            className={`sidebar__menu ${pathname === "/" && "active"} `}
+          >
             <i className="bx bx-grid-alt"></i>
             <span className="links_name">Dashboard</span>
           </Link>
         </li>
         <li>
-          <Link to={"/products"} className="sidebar__menu">
+          <Link
+            to={"/products"}
+            className={`sidebar__menu ${pathname === "/products" && "active"} `}
+          >
             <i className="bx bx-box"></i>
             <span className="links_name">Productos</span>
           </Link>
         </li>
+
         <li>
-          <Link to={"/categories"} className="sidebar__menu">
-            <i className="bx bx-book-alt"></i>
-            <span className="links_name">Categorias</span>
-          </Link>
-        </li>
-        <li>
-          <Link to={"/users"} className="sidebar__menu">
+          <Link to={"/users"}  className={`sidebar__menu ${pathname === "/users" && "active"} `}>
             <i className="bx bx-user-pin"></i>
             <span className="links_name">Usuarios</span>
           </Link>
         </li>
         <li>
-          <Link to={"/orders"} className="sidebar__menu">
+          <Link to={"/orders"} className={`sidebar__menu ${pathname === "/orders" && "active"} `}>
             <i className="bx bx-list-ul"></i>
             <span className="links_name">Ordenes</span>
           </Link>
@@ -64,22 +65,3 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
-{
-  /* <script>
-    const menu_list = document.querySelectorAll(".sidebar__menu");
-    console.log(menu_list)
-    panels.forEach((menu) => {
-      menu_list.addEventListener("click", () => {
-        removeActiveclassName();
-        menu.classNameList.add("active");
-      });
-    });
-
-    function removeActiveclassName() {
-      menu_list.forEach((menu) => {
-        menu.classNameList.remove("active");
-      });
-    }
-  </script> */
-}
